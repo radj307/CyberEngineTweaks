@@ -387,7 +387,7 @@ void LuaSandbox::InitializeIOForSandbox(Sandbox& aSandbox, const std::string& ac
 
         sol::table res(sv, sol::create);
         int index = 1;
-        for (const auto& file : std::filesystem::directory_iterator(absPath))
+        for (const auto& file : std::filesystem::directory_iterator(absPath, std::filesystem::directory_options::follow_directory_symlink))
         {
             sol::table item(sv, sol::create);
             item["name"] = relative(file.path(), absPath).string();

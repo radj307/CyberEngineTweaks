@@ -18,7 +18,7 @@ void ScriptStore::LoadAll()
     auto consoleLogger = spdlog::get("scripting");
 
     const auto& cModsRoot = m_paths.ModsRoot();
-    for (const auto& file : std::filesystem::directory_iterator(cModsRoot))
+    for (const auto& file : std::filesystem::directory_iterator(cModsRoot, std::filesystem::directory_options::follow_directory_symlink))
     {
         if (!file.is_directory())
             continue;
